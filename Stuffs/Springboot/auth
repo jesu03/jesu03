@@ -1,1 +1,22 @@
+//entity class name --> Registration 
+//controller class name --> RegistrationController
+//repo class name --> RegistrationRepository
 
+-->Authentication without session,jwt
+
+@PostMapping("/login")
+    public String login(@RequestBody Registration registration) throws Exception{
+        String name = registration.getName();
+        Integer password = registration.getPassword();
+
+        Registration user = registrationRepository.findByName(name);
+        if (user == null) {
+            throw new Exception("wrong username");
+        }
+
+        if (!user.getPassword().equals(password)) {
+            throw new Exception("wrong password");
+        }
+
+        return "Login successful";
+    }
