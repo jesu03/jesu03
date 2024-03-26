@@ -1,1 +1,14 @@
+#bootstrap
+npm i bootstrap
+npm i react-bootstrap
+
+#semantic bootstrap
+yarn add semantic-ui-react semantic-ui-css
+
+npm install semantic-ui-react semantic-ui-css
+
+import 'semantic-ui-css/semantic.min.css'
+
+#cdn link
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 
