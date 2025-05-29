@@ -110,4 +110,125 @@ Below is a simple JavaScript snippet that demonstrates how to dynamically load t
 
 ---
 
+
+
+ChatGPT
+You said:
+JavaScript Integration:
+
+Include the vzigaaplugin.min.js script on your page by adding it to the head of your HTML file as shown below. Always load vzigaaplugin.min.js directly from the Adaptive Auth domain. Do not include the script in a bundle or host a copy of it yourself.
+
+Make sure that "async" and "defer" attributes are not removed from the script tag. They help with loading scripts asynchronously and don't block parsing of the rest of your page body.
+
+UI Throttling Between BAU and NSA:
+
+If the Pre-Initialize response transactionID starts with "W", then invoke the existing JS "{{baso.JsUrl)]/an/aa/aa/assets/js/vzigaaplugin.min.js"
+
+If the Pre-Initialize response transactionID starts with "N", then invoke the New JS "[(baso.JsUrf))/am/aa/nsa/assets/js/vzigaaplugin.min.js"
+
+Example:
+
+
+Take this lines expand to one page like fits to word document 
+ChatGPT said:
+Here's an expanded, Word-document-ready version of your content, formatted clearly with headings, explanation, and examples for easy readability and professional presentation:
+
+JavaScript Integration Guide for Adaptive Authentication
+1. Including the vzigaaplugin.min.js Script
+To properly integrate the vzigaaplugin.min.js script into your HTML page, follow the instructions below:
+
+✅ Correct Script Inclusion
+Ensure you always load vzigaaplugin.min.js directly from the Adaptive Auth domain. Do not include this script in a JavaScript bundle or host a local copy. Doing so may result in unexpected behavior or security issues.
+
+Add the following <script> tag to the <head> section of your HTML file:
+
+<script 
+  src="https://adaptiveauth.example.com/path/to/vzigaaplugin.min.js" 
+  async 
+  defer>
+</script>
+⚠️ Important Notes:
+Do not remove the async and defer attributes from the <script> tag.
+
+These attributes are crucial because they:
+
+Allow the script to load asynchronously, preventing it from blocking other resources.
+
+Ensure the script executes after the HTML document has been fully parsed.
+
+2. UI Throttling Between BAU and NSA
+The version of the vzigaaplugin.min.js script to be loaded depends on the value of the transactionID received in the Pre-Initialize response.
+
+🔹 Condition-Based Script Loading
+Transaction ID Prefix	Script URL to Use
+Starts with "W"	{{baso.JsUrl}}/an/aa/aa/assets/js/vzigaaplugin.min.js
+Starts with "N"	{{baso.JsUrl}}/am/aa/nsa/assets/js/vzigaaplugin.min.js
+🔍 Explanation:
+If the transaction ID starts with "W", this indicates that the standard BAU (Business As Usual) flow should be followed.
+
+If the transaction ID starts with "N", it signals the NSA (New Security Architecture) flow, and a different script should be loaded accordingly.
+
+3. Example Implementation
+Below is a simple JavaScript snippet that demonstrates how to dynamically load the correct version of the vzigaaplugin.min.js script based on the transactionID:
+
+<script>
+  const transactionID = getPreInitTransactionID(); // Replace with actual method
+
+  let script = document.createElement('script');
+  script.async = true;
+  script.defer = true;
+
+  if (transactionID.startsWith("W")) {
+    script.src = "{{baso.JsUrl}}/an/aa/aa/assets/js/vzigaaplugin.min.js";
+  } else if (transactionID.startsWith("N")) {
+    script.src = "{{baso.JsUrl}}/am/aa/nsa/assets/js/vzigaaplugin.min.js";
+  }
+
+  document.head.appendChild(script);
+</script>
+4. Summary
+Always include vzigaaplugin.min.js directly from the Adaptive Auth domain.
+
+Never host or bundle the script yourself.
+
+Retain both async and defer attributes.
+
+Use conditional logic to select the script version based on the transaction ID prefix:
+
+"W" → Standard BAU script.
+
+"N" → NSA-specific script.
+
+Let me know if you’d like this as a downloadable Word file.
+
+You said:
+The Adaptive Auth Javascript provides two options to integrate
+
+1) With CVS UI- the complete UX managed by the Adaptive Auth.
+
+2) Without CVS UI-in this option the client controls the UX and the library provides the core functionalities.
+
+
+Take this two lines give me half page of the content 
+make somehow 
+I want 
+ChatGPT said:
+Here is a professional and detailed half-page explanation of the two integration options provided by the Adaptive Auth JavaScript. This version is well-suited for inclusion in documentation or presentation materials:
+
+Adaptive Auth JavaScript Integration Options
+Adaptive Authentication offers two distinct methods for integrating its JavaScript library into your application. These options provide flexibility depending on your user experience (UX) requirements and development approach:
+
+1. Integration With CVS UI (Full UX Managed by Adaptive Auth)
+In this mode, the entire user interface (UI) and experience (UX) are handled by the Adaptive Auth platform. The front-end design, screens, input forms, and transitions are all rendered and controlled by the Adaptive Auth system. This approach significantly reduces development effort and ensures a consistent and secure authentication flow that is automatically aligned with best practices and compliance requirements.
+
+This is ideal for applications that want to minimize customization overhead and leverage a standardized, plug-and-play security interface directly out of the box.
+
+2. Integration Without CVS UI (Client-Controlled UX)
+In this mode, the client application fully controls the user interface, while the Adaptive Auth JavaScript library provides only the core security functionalities, such as challenge generation, token processing, or session management. This allows for complete UX customization, enabling the client to maintain full control over branding, layout, and user interaction flow.
+
+This option is ideal for applications that require a tailored experience, integrate tightly with an existing design system, or need to accommodate unique user journey requirements.
+
+
+
+
 Let me know if you’d like this as a downloadable Word file.
