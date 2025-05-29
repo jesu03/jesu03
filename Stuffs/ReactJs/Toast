@@ -22,26 +22,58 @@ export default App
 
 
 
-Here's a clear and concise one-page content version of the **Callback Response Codes** list, suitable for documentation, internal portals, or user guides:
+Here’s a full **one-page Word document-style content** that includes an introduction, detailed table, explanations, and usage guidance for the callback response codes. This format is ideal for documentation or formal reference material.
 
 ---
 
-## **Callback Response Codes**
+## **Callback Response Codes Documentation**
 
-This section provides definitions for standard callback response codes used in the system. These codes help identify the status or result of a callback request.
+### **Overview**
 
-| **Code** | **Definition**                                                              |
-| -------- | --------------------------------------------------------------------------- |
-| 20       | **Completed** – The request has been successfully processed.                |
-| 02       | **Processing Error** – An error occurred while processing the request.      |
-| 09       | **Invalid Request** – The request format or content is not valid.           |
-| 06       | **Max Attempts** – The maximum number of allowed attempts has been reached. |
-| 07       | **Expired** – The request has expired and is no longer valid.               |
-| 600      | **Resend Requested** – A resend of the original request has been triggered. |
-| 601      | **Request Canceled** – The request was canceled by the user or system.      |
+Callback response codes are standardized indicators used by our system to communicate the result or status of an asynchronous operation. These codes are especially important for external systems, developers, and internal support teams to understand the state of a callback request, determine next steps, and handle exceptions appropriately.
 
-> **Note:** These codes are critical for understanding the outcome of callback transactions. Always refer to this table when troubleshooting or integrating with callback endpoints.
+This document outlines the meaning and implications of each response code and provides guidance on how to interpret and act on them.
 
 ---
 
-Let me know if you'd like this formatted for a webpage, PDF, or added to an existing document.
+### **Response Code Definitions**
+
+| **Code** | **Label**            | **Description**                                                                   |
+| -------- | -------------------- | --------------------------------------------------------------------------------- |
+| 20       | **Completed**        | The callback was successfully processed. No further action is required.           |
+| 02       | **Processing Error** | An internal error occurred during processing. The request may need to be retried. |
+| 09       | **Invalid Request**  | The request format or data was incorrect. Review the request payload.             |
+| 06       | **Max Attempts**     | The request has reached the maximum number of retry attempts without success.     |
+| 07       | **Expired**          | The callback window expired before completion. A new request may be needed.       |
+| 600      | **Resend Requested** | A resend has been requested, usually due to failure in delivery or timeout.       |
+| 601      | **Request Canceled** | The request was manually or systemically canceled before processing completed.    |
+
+---
+
+### **Usage Guidelines**
+
+* **Monitoring & Logging**: Each response code should be logged for auditing and troubleshooting purposes.
+* **Automated Handling**:
+
+  * Code `20` indicates success and should be treated as terminal.
+  * Codes like `02`, `600` may be eligible for automatic retry logic.
+  * Codes `06`, `07`, `601` typically indicate a final state and may require user intervention or logging only.
+* **Integration Notes**: External systems consuming these callbacks should map these codes appropriately in their workflows and error-handling mechanisms.
+
+---
+
+### **Troubleshooting Tips**
+
+* **Frequent 02 (Processing Error)**: Review system logs for exceptions. Consider implementing a retry strategy with exponential backoff.
+* **09 (Invalid Request)**: Validate the request body structure, headers, and data types. Schema validation tools can help.
+* **600 (Resend Requested)**: Ensure your system supports idempotency if multiple deliveries of the same request are possible.
+
+---
+
+### **Conclusion**
+
+Understanding and correctly handling callback response codes is crucial for building reliable and maintainable systems. Use this document as a quick reference when debugging or designing integrations that rely on asynchronous callbacks.
+
+---
+
+Would you like me to export this as a `.docx` Word file for download?
