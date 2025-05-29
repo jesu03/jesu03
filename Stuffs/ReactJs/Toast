@@ -17,3 +17,97 @@ const App = () =>{
     );
   }
 export default App
+
+
+
+
+
+Here's an expanded, Word-document-ready version of your content, formatted clearly with headings, explanation, and examples for easy readability and professional presentation:
+
+---
+
+# JavaScript Integration Guide for Adaptive Authentication
+
+## 1. Including the `vzigaaplugin.min.js` Script
+
+To properly integrate the `vzigaaplugin.min.js` script into your HTML page, follow the instructions below:
+
+### ✅ Correct Script Inclusion
+
+Ensure you **always load `vzigaaplugin.min.js` directly from the Adaptive Auth domain**. Do **not** include this script in a JavaScript bundle or host a local copy. Doing so may result in unexpected behavior or security issues.
+
+Add the following `<script>` tag to the `<head>` section of your HTML file:
+
+```html
+<script 
+  src="https://adaptiveauth.example.com/path/to/vzigaaplugin.min.js" 
+  async 
+  defer>
+</script>
+```
+
+### ⚠️ Important Notes:
+
+* **Do not remove** the `async` and `defer` attributes from the `<script>` tag.
+* These attributes are crucial because they:
+
+  * Allow the script to load **asynchronously**, preventing it from blocking other resources.
+  * Ensure the script executes **after** the HTML document has been fully parsed.
+
+---
+
+## 2. UI Throttling Between BAU and NSA
+
+The version of the `vzigaaplugin.min.js` script to be loaded depends on the value of the **`transactionID`** received in the **Pre-Initialize response**.
+
+### 🔹 Condition-Based Script Loading
+
+| Transaction ID Prefix | Script URL to Use                                        |
+| --------------------- | -------------------------------------------------------- |
+| Starts with `"W"`     | `{{baso.JsUrl}}/an/aa/aa/assets/js/vzigaaplugin.min.js`  |
+| Starts with `"N"`     | `{{baso.JsUrl}}/am/aa/nsa/assets/js/vzigaaplugin.min.js` |
+
+### 🔍 Explanation:
+
+* If the transaction ID **starts with `"W"`**, this indicates that the standard **BAU (Business As Usual)** flow should be followed.
+* If the transaction ID **starts with `"N"`**, it signals the **NSA (New Security Architecture)** flow, and a different script should be loaded accordingly.
+
+---
+
+## 3. Example Implementation
+
+Below is a simple JavaScript snippet that demonstrates how to dynamically load the correct version of the `vzigaaplugin.min.js` script based on the `transactionID`:
+
+```html
+<script>
+  const transactionID = getPreInitTransactionID(); // Replace with actual method
+
+  let script = document.createElement('script');
+  script.async = true;
+  script.defer = true;
+
+  if (transactionID.startsWith("W")) {
+    script.src = "{{baso.JsUrl}}/an/aa/aa/assets/js/vzigaaplugin.min.js";
+  } else if (transactionID.startsWith("N")) {
+    script.src = "{{baso.JsUrl}}/am/aa/nsa/assets/js/vzigaaplugin.min.js";
+  }
+
+  document.head.appendChild(script);
+</script>
+```
+
+---
+
+## 4. Summary
+
+* Always include `vzigaaplugin.min.js` directly from the Adaptive Auth domain.
+* Never host or bundle the script yourself.
+* Retain both `async` and `defer` attributes.
+* Use conditional logic to select the script version based on the transaction ID prefix:
+
+  * `"W"` → Standard BAU script.
+  * `"N"` → NSA-specific script.
+
+---
+
+Let me know if you’d like this as a downloadable Word file.
